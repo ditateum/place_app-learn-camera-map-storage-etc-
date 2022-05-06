@@ -24,12 +24,16 @@ class _ImageInputState extends State<ImageInput> {
       maxWidth: 600,
     );
 
+    if (imageFile == null) {
+      return;
+    }
+
     setState(() {
-      _storedImage = File(imageFile!.path);
+      _storedImage = File(imageFile.path);
     });
 
     final appDir = await syspaths.getApplicationDocumentsDirectory();
-    final fileName = path.basename(imageFile!.path);
+    final fileName = path.basename(imageFile.path);
 
     final savedImage =
         await File(imageFile.path).copy('${appDir.path}/$fileName');
